@@ -1,0 +1,25 @@
+<p>
+<a href="about">このサービスについて</a>
+</p>
+<h1>編集</h1>
+<form>
+<div>
+id: <%=@id%>
+<input type="hidden" name ="id" value=<%=@id%>>
+<input type="hidden" name ="memo_index" value=<%=@memo_index%>>
+</div>
+<div>
+  title
+  <br>
+  <input type="text" name="title" value= <%=@title%>>
+</div>
+<div>
+  本文
+  <br>
+  <textarea name="details" rows="5"><%=@details%></textarea>
+</div>
+<div>
+  <input type="submit" value="保存" formaction="update_memo" formmethod="PATCH">
+  <input type="submit" value="削除" formaction="delete_memo" formmethod="DELETE">
+</div>
+</form>

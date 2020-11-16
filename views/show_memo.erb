@@ -1,0 +1,20 @@
+<h1>お問い合わせ内容確認</h1>
+<div>
+  <div>
+  id: <%=@id%>
+  <input type="hidden" name ="memo_index" value=<%=@memo_index%>>
+  </div>
+  <div>
+  title: <%=@title%>
+  </div>  
+  <div>
+    本文:
+    <p>
+      <%=@details%>
+    </p>
+  </div>
+</div>
+<a href="http://localhost:4567/edit_memo?id=<%=@memo_index%>">edit_memo</a>
+<p>
+<a href="/">index</a>
+</p>

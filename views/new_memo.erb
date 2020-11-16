@@ -1,0 +1,22 @@
+<p>
+<a href="about">このサービスについて</a>
+</p>
+<h1>新規メモ</h1>
+<form action="save_memo" method="POST">
+<div>
+id: <%=@id%>
+</div>
+<div>
+  title
+  <br>
+  <input type="text" name="title" value="">
+</div>
+<div>
+  本文
+  <br>
+  <textarea name="details" rows="5"></textarea>
+</div>
+<div>
+  <input type="submit" value="保存">
+</div>
+</form>

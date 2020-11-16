@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5fa707d3-5100-4644-b6fd-77af14e84599" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1jy32uxI9nnfGK4Het6F3gqRZci" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.settings.patched" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5fa707d3-5100-4644-b6fd-77af14e84599" name="Default Changelist" comment="" />
+      <created>1604762301259</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604762301259</updated>
+      <workItem from="1604762302323" duration="379000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="595" height="184" key="GridCell.Tab.0.bottom" timestamp="1604762663838">
+      <screen x="0" y="23" width="1253" height="777" />
+    </state>
+    <state width="595" height="184" key="GridCell.Tab.0.bottom/0.23.1253.777@0.23.1253.777" timestamp="1604762663838" />
+    <state width="595" height="184" key="GridCell.Tab.0.center" timestamp="1604762663837">
+      <screen x="0" y="23" width="1253" height="777" />
+    </state>
+    <state width="595" height="184" key="GridCell.Tab.0.center/0.23.1253.777@0.23.1253.777" timestamp="1604762663837" />
+    <state width="595" height="184" key="GridCell.Tab.0.left" timestamp="1604762663836">
+      <screen x="0" y="23" width="1253" height="777" />
+    </state>
+    <state width="595" height="184" key="GridCell.Tab.0.left/0.23.1253.777@0.23.1253.777" timestamp="1604762663836" />
+    <state width="595" height="184" key="GridCell.Tab.0.right" timestamp="1604762663837">
+      <screen x="0" y="23" width="1253" height="777" />
+    </state>
+    <state width="595" height="184" key="GridCell.Tab.0.right/0.23.1253.777@0.23.1253.777" timestamp="1604762663837" />
+  </component>
+</project>
