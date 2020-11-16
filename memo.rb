@@ -99,7 +99,7 @@ get "/update_memo" do
   @title = params[:title]
   @details = params[:details]
   # updateの作業
-  $memos.delete_at(@id.to_i)
+  $memos.delet_at(@id.to_i)
   memo_new ={"id"=>@id.to_i, "title" => @title, "details" => @details}
   $memos.push(memo_new)
   $memos.sort_by!{ |k| k["id"]}
