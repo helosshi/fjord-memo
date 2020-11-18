@@ -17,3 +17,7 @@ gem "sqlite3", "~> 1.4"
 gem "activerecord", "~> 6.0"
 
 gem "json", "~> 2.3"
+
+group :development do
+  gem 'rubocop-fjord', require: false
+end
