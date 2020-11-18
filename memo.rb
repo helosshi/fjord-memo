@@ -37,7 +37,7 @@ get "/" do
   if $memos.length != 0
     memo_list = ""
     $memos.each_with_index do |num,memo_index|
-      memo_list << "<li><a href=#{"http://localhost:4567/show_memo?id=#{memo_index}"}>#{num["id"].to_s}_#{num["title"].to_s}</a></li>"
+      memo_list << "<li><a href=#{"http://localhost:4567/show_memo?memo_index=#{memo_index}"}>#{num["id"].to_s}_#{num["title"].to_s}</a></li>"
     end
     @memo_list = memo_list
   else
@@ -53,16 +53,12 @@ get "/about" do
 end
 
 get "/new_memo" do
-  if $memos.length != 0
-    @id = $memos[-1]["id"].to_i + 1
-  else
-    @id = 0
-  end
+  @id = rand(1000000)
   erb :new_memo
 end
 
 get "/edit_memo" do
-  @memo_index = params[:id].to_i
+  @memo_index = params[:memo_index].to_i
   @id = $memos[@memo_index]["id"]
   @title = $memos[@memo_index]["title"]
   @details = $memos[@memo_index]["details"]
@@ -70,7 +66,7 @@ get "/edit_memo" do
 end
 
 get "/show_memo" do
-  @memo_index = params[:id].to_i
+  @memo_index = params[:memo_index].to_i
   @id = $memos[@memo_index]["id"]
   @title = $memos[@memo_index]["title"]
   @details = $memos[@memo_index]["details"]
@@ -78,10 +74,10 @@ get "/show_memo" do
 end
 
 post "/save_memo" do
-  if $memos.length != 0
-    @id = $memos[-1]["id"].to_i + 1
+  if @id != 0
+    @id = params[:id]
   else
-    @id = 0
+    @id = rand(10000)
   end
   @title = params[:title]
   @details = params[:details]
@@ -98,8 +94,9 @@ get "/update_memo" do
   @id = params[:id]
   @title = params[:title]
   @details = params[:details]
+  @memo_index = params[:memo_index]
   # updateの作業
-  $memos.delet_at(@id.to_i)
+  $memos.delete_at(@memo_index.to_i)
   memo_new ={"id"=>@id.to_i, "title" => @title, "details" => @details}
   $memos.push(memo_new)
   $memos.sort_by!{ |k| k["id"]}
@@ -110,8 +107,8 @@ end
 
 get "/delete_memo" do
   # delete作業させる
-  @id = params[:id]
-  $memos.delete_at(@id.to_i)
+  @memo_index = params[:memo_index]
+  $memos.delete_at(@memo_index.to_i)
   $memos.sort_by!{ |k| k["id"]}
   rewrite_json
   # 単に削除
