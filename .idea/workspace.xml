@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fa707d3-5100-4644-b6fd-77af14e84599" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sinatra_memo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sinatra_memo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/json/test.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/memo.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/concurrent-ruby-1.1.7/concurrent-ruby-1.1.7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/concurrent-ruby-1.1.7/concurrent-ruby-1.1.7.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/json-2.3.1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/json-2.3.1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/rack-protection-2.1.0/rack-protection-2.1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/rack-protection-2.1.0/rack-protection-2.1.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/redcarpet-3.5.0/redcarpet-3.5.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/redcarpet-3.5.0/redcarpet-3.5.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/sinatra-2.1.0/sinatra-2.1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/sinatra-2.1.0/sinatra-2.1.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/sqlite3-1.4.2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/sqlite3-1.4.2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/thread_safe-0.3.6/thread_safe-0.3.6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bundle/ruby/2.6.0/gems/thread_safe-0.3.6/thread_safe-0.3.6.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1604762301259</updated>
       <workItem from="1604762302323" duration="379000" />
-      <workItem from="1605710569801" duration="1022000" />
+      <workItem from="1605710569801" duration="2303000" />
     </task>
     <servers />
   </component>
