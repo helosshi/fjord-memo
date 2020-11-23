@@ -1,19 +1,9 @@
-<h1>保存内容確認</h1>
-<div>
-  <div>
-  id: <%=@id%>
-  </div>
-  <div>
-    title: <%=@title%>
-  </div>  
-  <div>
-    本文:
-    <p>
-      <%=@details%>
-    </p>
-  </div>
-</div>
-
-<p>
-<a href="/">index</a>
-</p>
+<p class="lead">保存内容確認</p>
+  <dl class="dl-horizontal">
+  <dt class="col-sm-3">id:</dt>
+  <dd class="col-sm-9"><%=@id%></dd>
+  <dt class="col-sm-3">title:</dt>
+  <dd class="col-sm-9"><%=@title%></dd>
+  <dt class="col-sm-3">details:</dt>
+  <dd class="col-sm-9"><%=@details%></dd>
+</dl>

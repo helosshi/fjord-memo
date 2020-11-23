@@ -43,11 +43,11 @@ end
 # routing
 get '/' do
   @title = 'Memo'
-  @content = "index by #{strong(@author)}"
+  @content = "created by #{strong(@author)}"
   if !$memos.empty?
     memo_list = ''
     $memos.each_with_index do |num, memo_index|
-      memo_list << "<li><a href=#{"http://localhost:4567/show_memo?memo_index=#{memo_index}"}>#{num['id']}_#{num['title']}</a></li>"
+      memo_list << "<li class=#{"list-group-item"}><a href=#{"http://localhost:4567/show_memo?memo_index=#{memo_index}"}>#{num['id']}_#{num['title']}</a></li>"
     end
     @memo_list = memo_list
   else

@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <mata charset="utf-8">
-  <title><%= @title %></title>
-</head>
-<body>
-    <%= yield %></body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= @title %></title>
+    <!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- jQuery読み込み -->
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  </head>
+  <body>
+  <div class="fixed-top bg-secondry"><a href="about">このサービスについて</a></div>
+  <br>
+  <%= yield %>
+  <br>
+  <div class="fixed-bottom bg-primary"><%= @content %></div>
+  </body>
 </html>
