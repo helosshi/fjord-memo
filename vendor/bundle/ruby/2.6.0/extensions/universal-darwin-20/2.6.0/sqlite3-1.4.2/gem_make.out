@@ -1,5 +1,5 @@
 current directory: /Users/helosshi/Documents/GitHub/fjord-memo/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/ext/sqlite3
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20201124-40963-bxd3w7.rb extconf.rb
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20201126-23452-5rjwzg.rb extconf.rb
 checking for sqlite3.h... yes
 checking for pthread_create() in -lpthread... yes
 checking for -ldl... yes
@@ -61,17 +61,17 @@ compiling exception.c
 compiling sqlite3.c
 compiling statement.c
 linking shared-object sqlite3/sqlite3_native.bundle
-ld: warning: directory not found for option '-L/usr/local/Cellar/sqlite/3.33.0/lib'
+ld: warning: directory not found for option '-L/opt/homebrew/Cellar/sqlite/3.33.0/lib'
 ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/local/lib'
-ld: warning: ignoring file backup.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
 ld: warning: ignoring file aggregator.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
-ld: warning: ignoring file sqlite3.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: ignoring file backup.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
 ld: warning: ignoring file database.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
 ld: warning: ignoring file exception.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
 ld: warning: ignoring file statement.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
-ld: warning: directory not found for option '-L/usr/local/Cellar/sqlite/3.33.0/lib'
+ld: warning: ignoring file sqlite3.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: directory not found for option '-L/opt/homebrew/Cellar/sqlite/3.33.0/lib'
 ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/local/lib'
 
 current directory: /Users/helosshi/Documents/GitHub/fjord-memo/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20201124-40963-ez7i7w/sqlite3
+/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20201126-23452-1pdd4e6/sqlite3
