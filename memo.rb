@@ -38,6 +38,9 @@ helpers do
   def strong(abc)
     "<strong> #{abc} </strong>"
   end
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
 end
 
 # routing
@@ -47,7 +50,7 @@ get '/' do
   if !$memos.empty?
     memo_list = ''
     $memos.each_with_index do |num, memo_index|
-      memo_list << "<li class=#{"list-group-item"}><a href=#{"/show_memo?memo_index=#{memo_index}"}>#{num['title']}</a></li>"
+      memo_list << "<li class=#{"list-group-item"}><a href=#{"/show_memo?memo_index=#{memo_index}"}>#{h(num['title'])}</a></li>"
     end
     @memo_list = memo_list
   else
@@ -68,29 +71,29 @@ get '/new_memo' do
 end
 
 get '/edit_memo' do
-  @memo_index = params[:memo_index].to_i
+  @memo_index = h(params[:memo_index]).to_i
   @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+  @title = h($memos[@memo_index]['title'])
+  @details = h($memos[@memo_index]['details'])
   erb :edit_memo
 end
 
 get '/show_memo' do
-  @memo_index = params[:memo_index].to_i
+  @memo_index = h(params[:memo_index]).to_i
   @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+  @title = h($memos[@memo_index]['title'])
+  @details = h($memos[@memo_index]['details'])
   erb :show_memo
 end
 
 post '/save_memo' do
   @id = if @id != 0
-          params[:id]
+          h(params[:id])
         else
           rand(1_000_000)
         end
-  @title = params[:title]
-  @details = params[:details]
+  @title = h(params[:title])
+  @details = h(params[:details])
   get_timestamp
   @create_time = @time_stamp
   @last_edit_time = @time_stamp
@@ -100,10 +103,10 @@ post '/save_memo' do
 end
 
 get '/update_memo' do
-  @id = params[:id]
-  @title = params[:title]
-  @details = params[:details]
-  @memo_index = params[:memo_index].to_i
+  @id = h(params[:id])
+  @title = h(params[:title])
+  @details = h(params[:details])
+  @memo_index = h(params[:memo_index]).to_i
   get_timestamp
   @create_time = $memos[@memo_index]['create_time']
   @last_edit_time = @time_stamp
@@ -114,7 +117,7 @@ get '/update_memo' do
 end
 
 get '/delete_memo' do
-  @memo_index = params[:memo_index].to_i
+  @memo_index = h(params[:memo_index]).to_i
   $memos.delete_at(@memo_index)
   rewrite_json
   erb :delete_memo
