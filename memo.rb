@@ -50,7 +50,7 @@ get '/' do
   if !$memos.empty?
     memo_list = ''
     $memos.each_with_index do |num, memo_index|
-      memo_list << "<li class=#{"list-group-item"}><a href=#{"/show_memo?memo_index=#{memo_index}"}>#{h(num['title'])}</a></li>"
+      memo_list << "<li class=#{"list-group-item"}><a href=#{"/#{memo_index}"}>#{h(num['title'])}</a></li>"
     end
     @memo_list = memo_list
   else
@@ -65,28 +65,28 @@ get '/about' do
   erb :about
 end
 
-get '/new_memo' do
+get '/new' do
   @id = rand(1_000_000)
-  erb :new_memo
+  erb :new
 end
 
-get '/edit_memo' do
+get '/edit/:memo_index' do
   @memo_index = params[:memo_index].to_i
   @id = $memos[@memo_index]['id']
   @title = $memos[@memo_index]['title']
   @details = $memos[@memo_index]['details']
-  erb :edit_memo
+  erb :edit
 end
 
-get '/show_memo' do
+get '/:memo_index' do
   @memo_index = params[:memo_index].to_i
   @id = $memos[@memo_index]['id']
   @title = $memos[@memo_index]['title']
   @details = $memos[@memo_index]['details']
-  erb :show_memo
+  erb :show
 end
 
-post '/save_memo' do
+post '/save' do
   @id = if @id != 0
           params[:id]
         else
@@ -99,10 +99,10 @@ post '/save_memo' do
   @last_edit_time = @time_stamp
   save_memo
   rewrite_json
-  erb :save_memo
+  erb :save
 end
 
-get '/update_memo' do
+get '/update/:memo_index' do
   @id = params[:id]
   @title = params[:title]
   @details = params[:details]
@@ -113,12 +113,12 @@ get '/update_memo' do
   $memos.delete_at(@memo_index)
   save_memo
   rewrite_json
-  erb :update_memo
+  erb :update
 end
 
-get '/delete_memo' do
+get '/delete/:memo_index' do
   @memo_index = params[:memo_index].to_i
   $memos.delete_at(@memo_index)
   rewrite_json
-  erb :delete_memo
+  erb :delete
 end

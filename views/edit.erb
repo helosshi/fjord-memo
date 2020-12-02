@@ -15,7 +15,7 @@
     <br>
     <textarea name="details" rows="5"><%=@details%></textarea>
     <br>
-    <input type="submit" value="保存" formaction="update_memo" formmethod="PATCH" class="btn btn-success">
-    <input type="submit" value="削除" formaction="delete_memo" formmethod="DELETE" class="btn btn-danger">
+    <input type="submit" value="保存" formaction="/update/<%=@memo_index%>" formmethod="PATCH" class="btn btn-success">
+    <input type="submit" value="削除" formaction="/delete/<%=@memo_index%>" formmethod="DELETE" class="btn btn-danger">
   </div>
 </form>
