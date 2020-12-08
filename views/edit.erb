@@ -1,7 +1,6 @@
 <p class="lead">Edit</p>
 <form>
   <input type="hidden" name ="id" value=<%=@id%>>
-  <input type="hidden" name ="memo_index" value=<%=@memo_index%>>
   <input type="hidden" name ="create_time" value=<%=@create_time%>>
   <input type="hidden" name ="last_edit_time" value=<%=@last_edit_time%>>
   <div class="form-group">
@@ -15,7 +14,7 @@
     <br>
     <textarea name="details" rows="5"><%=@details%></textarea>
     <br>
-    <input type="submit" value="保存" formaction="/update/<%=@memo_index%>" formmethod="PATCH" class="btn btn-success">
-    <input type="submit" value="削除" formaction="/delete/<%=@memo_index%>" formmethod="DELETE" class="btn btn-danger">
+    <input type="submit" value="保存" formaction="/update/<%=@id%>" formmethod="PATCH" class="btn btn-success">
+    <input type="submit" value="削除" formaction="/delete/<%=@id%>" formmethod="DELETE" class="btn btn-danger">
   </div>
 </form>

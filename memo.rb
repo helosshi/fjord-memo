@@ -1,32 +1,38 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
+require 'pg'
 
 # global setting
 enable :method_override
 
-$json_file_path = 'json/test.json'
+CONNECTION = PG.connect(host: 'localhost', user: 'postgres', dbname: 'fjord_memo_db')
+CONNECTION.internal_encoding = 'UTF-8'
 
-$json_data = open($json_file_path) do |io|
-  JSON.load(io)
+def load_db
+  CONNECTION.exec('SELECT * FROM memos')
 end
 
-$memos = $json_data['memos']
-
-def rewrite_json
-  $memos.sort_by! { |k| k['create_time'] }
-  File.open('json/test.json', 'w') do |file|
-    JSON.dump($json_data, file)
-  end
+def reorder_db
+  CONNECTION.exec('SELECT * FROM memos ORDER BY create_time')
 end
 
-def get_timestamp
-  @time_stamp = Time.now.to_i
+def add_db
+  CONNECTION.exec(
+    'INSERT INTO memos(title,details,create_time,last_edit_time) values($1,$2,now(),now())',
+    [params[:title], params[:details]]
+  )
 end
 
-def save_memo
-  memo_new = { 'id' => @id.to_i, 'title' => params[:title], 'details' => params[:details], 'create_time' => @create_time, 'last_edit_time' => @last_edit_time }
-  $memos.push(memo_new)
+def chech_db
+  CONNECTION.exec('SELECT * FROM memos WHERE id=$1', [params[:id]])
+end
+
+def update_db
+  CONNECTION.exec('UPDATE memos SET title = $1,details = $2,last_edit_time = now() WHERE id = $3', [params[:title], params[:details], params[:id]])
+end
+
+def delete_db
+  CONNECTION.exec('DELETE FROM memos WHERE id = $1', [params[:id]])
 end
 
 # helpers
@@ -38,6 +44,7 @@ helpers do
   def strong(abc)
     "<strong> #{abc} </strong>"
   end
+
   def h(text)
     Rack::Utils.escape_html(text)
   end
@@ -47,15 +54,11 @@ end
 get '/' do
   @title = 'Memo'
   @content = "created by #{strong(@author)}"
-  if !$memos.empty?
-    memo_list = ''
-    $memos.each_with_index do |num, memo_index|
-      memo_list << "<li class=#{"list-group-item"}><a href=#{"/#{memo_index}"}>#{h(num['title'])}</a></li>"
-    end
-    @memo_list = memo_list
-  else
-    @memo_list = 'not_found'
+  memo_list = ''
+  reorder_db.each do |id|
+    memo_list << "<li class=list-group-item}><a href=#{"/#{id['id']}"}>#{h(id['title'])}</a></li>"
   end
+  @memo_list = memo_list
   erb :index
 end
 
@@ -66,59 +69,49 @@ get '/about' do
 end
 
 get '/new' do
-  @id = rand(1_000_000)
   erb :new
 end
 
-get '/edit/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+get '/edit/:id' do
+  @id = params[:id].to_i
+  chech_db.each do |hoge|
+    @title = hoge['title']
+    @details = hoge['details']
+    @create_time = hoge['create_time']
+    @last_edit_time = hoge['last_edit_time']
+  end
   erb :edit
 end
 
-get '/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+get '/:id' do
+  @id = params[:id].to_i
+  chech_db.each do |hoge|
+    @title = hoge['title']
+    @details = hoge['details']
+    @create_time = hoge['create_time']
+    @last_edit_time = hoge['last_edit_time']
+  end
   erb :show
 end
 
 post '/save' do
-  @id = if @id != 0
-          params[:id]
-        else
-          rand(1_000_000)
-        end
+  add_db
   @title = params[:title]
   @details = params[:details]
-  get_timestamp
-  @create_time = @time_stamp
-  @last_edit_time = @time_stamp
-  save_memo
-  rewrite_json
   erb :save
 end
 
-get '/update/:memo_index' do
+get '/update/:id' do
   @id = params[:id]
   @title = params[:title]
   @details = params[:details]
-  @memo_index = params[:memo_index].to_i
-  get_timestamp
-  @create_time = $memos[@memo_index]['create_time']
-  @last_edit_time = @time_stamp
-  $memos.delete_at(@memo_index)
-  save_memo
-  rewrite_json
+  @create_time = params[:create_time]
+  update_db
   erb :update
 end
 
-get '/delete/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  $memos.delete_at(@memo_index)
-  rewrite_json
+get '/delete/:id' do
+  @id = params[:id]
+  delete_db
   erb :delete
 end
