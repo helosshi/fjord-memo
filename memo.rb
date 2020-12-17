@@ -1,38 +1,33 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pg'
+require './connection_to_db'
 
 # global setting
 enable :method_override
 
-CONNECTION = PG.connect(host: 'localhost', user: 'postgres', dbname: 'fjord_memo_db')
-CONNECTION.internal_encoding = 'UTF-8'
-
-def load_db
-  CONNECTION.exec('SELECT * FROM memos')
+def reorder_memo
+  connection_to_db
+  @results = CONNECTION.exec('SELECT * FROM memos ORDER BY create_time')
 end
 
-def reorder_db
-  CONNECTION.exec('SELECT * FROM memos ORDER BY create_time')
-end
-
-def add_db
+def add_memo
   CONNECTION.exec(
     'INSERT INTO memos(title,details,create_time,last_edit_time) values($1,$2,now(),now())',
-    [params[:title], params[:details]]
+    [@title, @details]
   )
 end
 
-def chech_db
-  CONNECTION.exec('SELECT * FROM memos WHERE id=$1', [params[:id]])
+def check_memo
+  CONNECTION.exec('SELECT * FROM memos WHERE id=$1', [@id])
 end
 
-def update_db
-  CONNECTION.exec('UPDATE memos SET title = $1,details = $2,last_edit_time = now() WHERE id = $3', [params[:title], params[:details], params[:id]])
+def update_memo
+  CONNECTION.exec('UPDATE memos SET title = $1,details = $2,last_edit_time = now() WHERE id = $3', [@title, @details, @id])
 end
 
-def delete_db
-  CONNECTION.exec('DELETE FROM memos WHERE id = $1', [params[:id]])
+def delete_memo
+  CONNECTION.exec('DELETE FROM memos WHERE id = $1', [@id])
 end
 
 # helpers
@@ -52,18 +47,21 @@ end
 
 # routing
 get '/' do
-  @title = 'Memo'
+  @page_name = 'Memo'
   @content = "created by #{strong(@author)}"
   memo_list = ''
-  reorder_db.each do |id|
-    memo_list << "<li class=list-group-item}><a href=#{"/#{id['id']}"}>#{h(id['title'])}</a></li>"
+  reorder_memo
+  results = @results
+  results.each do |result|
+    memo_list << "<li class=list-group-item}><a href=#{"/#{result['id']}"}>#{h(result['title'])}</a></li>"
   end
   @memo_list = memo_list
+  CONNECTION.finish
   erb :index
 end
 
 get '/about' do
-  @title = 'about'
+  @page_name = 'about'
   @content = "about content by#{strong(@author)}"
   erb :about
 end
@@ -74,30 +72,33 @@ end
 
 get '/edit/:id' do
   @id = params[:id].to_i
-  chech_db.each do |hoge|
+  check_memo.each do |hoge|
     @title = hoge['title']
     @details = hoge['details']
     @create_time = hoge['create_time']
     @last_edit_time = hoge['last_edit_time']
   end
+  @page_name = @title
   erb :edit
 end
 
 get '/:id' do
   @id = params[:id].to_i
-  chech_db.each do |hoge|
+  check_memo.each do |hoge|
     @title = hoge['title']
     @details = hoge['details']
     @create_time = hoge['create_time']
     @last_edit_time = hoge['last_edit_time']
   end
+  @page_name = @title
   erb :show
 end
 
 post '/save' do
-  add_db
   @title = params[:title]
   @details = params[:details]
+  @page_name = 'saved'
+  add_memo
   erb :save
 end
 
@@ -106,12 +107,14 @@ get '/update/:id' do
   @title = params[:title]
   @details = params[:details]
   @create_time = params[:create_time]
-  update_db
+  @page_name = 'updated'
+  update_memo
   erb :update
 end
 
 get '/delete/:id' do
   @id = params[:id]
-  delete_db
+  @page_name = 'deleted'
+  delete_memo
   erb :delete
 end
