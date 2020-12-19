@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bd66e5a-5acd-4c5c-93f2-72e2f47ad24e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/fjord-memo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connection_to_db.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sinatra_memo.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.rubocop.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.rubocop.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/memo.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layout.erb" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.erb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +46,8 @@
       <updated>1608045937145</updated>
       <workItem from="1608045942807" duration="1224000" />
       <workItem from="1608047261252" duration="2769000" />
-      <workItem from="1608223932728" duration="3088000" />
+      <workItem from="1608223932728" duration="3430000" />
+      <workItem from="1608388932420" duration="577000" />
     </task>
     <servers />
   </component>
