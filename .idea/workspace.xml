@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8bd66e5a-5acd-4c5c-93f2-72e2f47ad24e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memo.rb" beforeDir="false" afterPath="$PROJECT_DIR$/memo.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +48,9 @@
       <workItem from="1608045942807" duration="1224000" />
       <workItem from="1608047261252" duration="2769000" />
       <workItem from="1608223932728" duration="3430000" />
-      <workItem from="1608388932420" duration="577000" />
+      <workItem from="1608388932420" duration="2274000" />
+      <workItem from="1608477209110" duration="16000" />
+      <workItem from="1609086978353" duration="256000" />
     </task>
     <servers />
   </component>
