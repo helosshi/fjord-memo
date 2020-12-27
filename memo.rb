@@ -1,32 +1,46 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
+require 'pg'
+require './connection_to_db'
 
 # global setting
 enable :method_override
 
-$json_file_path = 'json/test.json'
-
-$json_data = open($json_file_path) do |io|
-  JSON.load(io)
+def reorder_memo
+  db_connection = connection_to_db
+  @results = db_connection.exec('SELECT * FROM memos ORDER BY create_time')
+  db_connection.finish
 end
 
-$memos = $json_data['memos']
-
-def rewrite_json
-  $memos.sort_by! { |k| k['create_time'] }
-  File.open('json/test.json', 'w') do |file|
-    JSON.dump($json_data, file)
-  end
+def add_memo
+  db_connection = connection_to_db
+  result = db_connection.exec(
+    'INSERT INTO memos(title,details,create_time,last_edit_time) values($1,$2,now(),now())',
+    [@title, @details]
+  )
+  db_connection.finish
+  result
 end
 
-def get_timestamp
-  @time_stamp = Time.now.to_i
+def check_memo
+  db_connection = connection_to_db
+  result = db_connection.exec('SELECT * FROM memos WHERE id=$1', [@id])
+  db_connection.finish
+  result
 end
 
-def save_memo
-  memo_new = { 'id' => @id.to_i, 'title' => params[:title], 'details' => params[:details], 'create_time' => @create_time, 'last_edit_time' => @last_edit_time }
-  $memos.push(memo_new)
+def update_memo
+  db_connection = connection_to_db
+  result = db_connection.exec('UPDATE memos SET title = $1,details = $2,last_edit_time = now() WHERE id = $3', [@title, @details, @id])
+  db_connection.finish
+  result
+end
+
+def delete_memo
+  db_connection = connection_to_db
+  result = db_connection.exec('DELETE FROM memos WHERE id = $1', [@id])
+  db_connection.finish
+  result
 end
 
 # helpers
@@ -38,6 +52,7 @@ helpers do
   def strong(abc)
     "<strong> #{abc} </strong>"
   end
+
   def h(text)
     Rack::Utils.escape_html(text)
   end
@@ -45,80 +60,73 @@ end
 
 # routing
 get '/' do
-  @title = 'Memo'
+  @page_name = 'Memo'
   @content = "created by #{strong(@author)}"
-  if !$memos.empty?
-    memo_list = ''
-    $memos.each_with_index do |num, memo_index|
-      memo_list << "<li class=#{"list-group-item"}><a href=#{"/#{memo_index}"}>#{h(num['title'])}</a></li>"
-    end
-    @memo_list = memo_list
-  else
-    @memo_list = 'not_found'
+  memo_list = ''
+  reorder_memo
+  results = @results
+  results.each do |result|
+    memo_list << "<li class=list-group-item}><a href=#{"/#{result['id']}"}>#{h(result['title'])}</a></li>"
   end
+  @memo_list = memo_list
   erb :index
 end
 
 get '/about' do
-  @title = 'about'
+  @page_name = 'about'
   @content = "about content by#{strong(@author)}"
   erb :about
 end
 
 get '/new' do
-  @id = rand(1_000_000)
   erb :new
 end
 
-get '/edit/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+get '/edit/:id' do
+  @id = params[:id].to_i
+  check_memo.each do |hoge|
+    @title = hoge['title']
+    @details = hoge['details']
+    @create_time = hoge['create_time']
+    @last_edit_time = hoge['last_edit_time']
+  end
+  @page_name = @title
   erb :edit
 end
 
-get '/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  @id = $memos[@memo_index]['id']
-  @title = $memos[@memo_index]['title']
-  @details = $memos[@memo_index]['details']
+get '/:id' do
+  @id = params[:id].to_i
+  check_memo.each do |hoge|
+    @title = hoge['title']
+    @details = hoge['details']
+    @create_time = hoge['create_time']
+    @last_edit_time = hoge['last_edit_time']
+  end
+  @page_name = @title
   erb :show
 end
 
 post '/save' do
-  @id = if @id != 0
-          params[:id]
-        else
-          rand(1_000_000)
-        end
   @title = params[:title]
   @details = params[:details]
-  get_timestamp
-  @create_time = @time_stamp
-  @last_edit_time = @time_stamp
-  save_memo
-  rewrite_json
+  @page_name = 'saved'
+  add_memo
   erb :save
 end
 
-get '/update/:memo_index' do
+get '/update/:id' do
   @id = params[:id]
   @title = params[:title]
   @details = params[:details]
-  @memo_index = params[:memo_index].to_i
-  get_timestamp
-  @create_time = $memos[@memo_index]['create_time']
-  @last_edit_time = @time_stamp
-  $memos.delete_at(@memo_index)
-  save_memo
-  rewrite_json
+  @create_time = params[:create_time]
+  @page_name = 'updated'
+  update_memo
   erb :update
 end
 
-get '/delete/:memo_index' do
-  @memo_index = params[:memo_index].to_i
-  $memos.delete_at(@memo_index)
-  rewrite_json
+get '/delete/:id' do
+  @id = params[:id]
+  @page_name = 'deleted'
+  delete_memo
   erb :delete
 end
